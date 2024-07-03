@@ -6,17 +6,22 @@
 using namespace geode::prelude;
 
 struct Button {
-    std::string label;
+    std::string name;
+    std::string id;
     bool isChecked;
 };
 
 std::vector<Button> buttonlist = {
-    {"Button 1", false},
-    {"Button 2", false},
-    {"Button 3", false}
+    {"All","loeneditor.all" false},
+    {"Foreground Tiles","loeneditor.ForegroundTiles", false},
+    {"Background Tiles","loeneditor.all", false},
+    {"Enitites","loeneditor.Enitites", false},
+    {"Triggers","loeneditor.Triggers", false},
+    {"Foreground Decals","loeneditor.ForegroundDecals", false},
+    {"Background Decals","loeneditor.BackgroundDecals", false}
 };
 
-ImVec2 windowPos = ImVec2(1500, 100); 
+ImVec2 windowPos = ImVec2(1500, 500); 
 
 $on_mod(Loaded) {
     ImGuiCocos::get().setup([] {
@@ -40,7 +45,7 @@ $on_mod(Loaded) {
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, buttonHoveredColor);
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, buttonActiveColor);
 
-            if (ImGui::Button(buttonlist[i].label.c_str())) {
+            if (ImGui::Button(buttonlist[i].name.c_str())) {
                 for (size_t j = 0; j < buttonlist.size(); ++j) {
                     buttonlist[j].isChecked = (i == j);
                 }
