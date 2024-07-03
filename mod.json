@@ -1,0 +1,14 @@
+{
+	"geode": "3.1.1",
+	"gd": {
+		"win": "2.206",
+		"android": "2.206",
+		"mac": "2.206",
+		"ios": "2.206"
+	},
+	"id": "viper.loeneditor",
+	"name": "lönneditor",
+	"version": "v1.0.0",
+	"developer": "Viper",
+	"description": "lönneditor is a mod that converts the gd editor into the celest lönn editor"
+}
