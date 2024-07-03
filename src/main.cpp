@@ -12,7 +12,7 @@ struct Button {
 };
 
 std::vector<Button> buttonlist = {
-    {"All","loeneditor.all" false},
+    {"All","loeneditor.all", false},
     {"Foreground Tiles","loeneditor.ForegroundTiles", false},
     {"Background Tiles","loeneditor.all", false},
     {"Enitites","loeneditor.Enitites", false},
