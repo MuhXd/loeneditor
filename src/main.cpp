@@ -16,7 +16,7 @@ std::vector<Button> buttonlist = {
     {"Button 3", false}
 };
 
-ImVec2 windowPos = ImVec2(1000, 100); 
+ImVec2 windowPos = ImVec2(1500, 100); 
 
 $on_mod(Loaded) {
     ImGuiCocos::get().setup([] {
