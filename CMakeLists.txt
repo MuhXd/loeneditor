@@ -22,7 +22,7 @@ add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 if (NOT DEFINED ENV{NO_IMGUI})
     CPMAddPackage("gh:matcool/gd-imgui-cocos#09a9555") # specify a commit!
     target_link_libraries(${PROJECT_NAME} imgui-cocos)
-    message(STATUS "ADDING GD-IMGUI")
+    message(STATUS "ADDED GD-IMGUI")
 endif()
 
 if (DEFINED ENV{GITHUB_ACTIONS})

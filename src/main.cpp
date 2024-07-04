@@ -1,27 +1,18 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/MenuLayer.hpp>
-
+#include <Geode/modify/LevelEditorLayer.hpp>
 #include <imgui-cocos.hpp>
 #include <vector>
+#include "utils.hpp"
 using namespace geode::prelude;
 
-struct Button {
-    std::string name;
-    std::string id;
-    bool isChecked;
-};
-
-std::vector<Button> buttonlist = {
-    {"All","loeneditor.all", false},
-    {"Foreground Tiles","loeneditor.ForegroundTiles", false},
-    {"Background Tiles","loeneditor.all", false},
-    {"Enitites","loeneditor.Enitites", false},
-    {"Triggers","loeneditor.Triggers", false},
-    {"Foreground Decals","loeneditor.ForegroundDecals", false},
-    {"Background Decals","loeneditor.BackgroundDecals", false}
-};
-
 ImVec2 windowPos = ImVec2(1500, 500); 
+
+class $modify(LevelEditorLayer) { 
+bool init(GJGameLevel* playerlayer, bool p1) {
+        LevelEditorLayer::init(playerlayer,p1);
+        return true;
+}
+};
 
 $on_mod(Loaded) {
     ImGuiCocos::get().setup([] {
@@ -29,32 +20,24 @@ $on_mod(Loaded) {
         // It's a callback as ImGui will be re-initialized when toggling fullscreen,
         // so use this to setup any themes and/or fonts!
     }).draw([] {
+        if (!LevelEditorLayer::get()) {
+            ImGui::End();
+            return;
+        };
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;
 
         ImGui::SetNextWindowPos(windowPos, ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(500, 500));
-
         ImGui::Begin("My awesome window", nullptr, window_flags);
-
-        for (size_t i = 0; i < buttonlist.size(); ++i) {
-            ImVec4 buttonColor = buttonlist[i].isChecked ? ImVec4(0.06f, 0.53f, 0.98f, 1.00f) : ImVec4(0.00f, 0.00f, 0.00f, 0.40f);
-            ImVec4 buttonHoveredColor = buttonlist[i].isChecked ? ImVec4(0.06f, 0.53f, 0.98f, 1.00f) : ImVec4(1.00f, 1.00f, 1.00f, 0.36f);
-            ImVec4 buttonActiveColor = buttonlist[i].isChecked ? ImVec4(0.06f, 0.53f, 0.98f, 1.00f) : ImVec4(0.00f, 0.00f, 0.00f, 0.40f);
-
-            ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, buttonHoveredColor);
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, buttonActiveColor);
-
-            if (ImGui::Button(buttonlist[i].name.c_str())) {
-                for (size_t j = 0; j < buttonlist.size(); ++j) {
-                    buttonlist[j].isChecked = (i == j);
-                }
-            }
-
-            ImGui::PopStyleColor(3);
-        }
-
-
+        ImGui::SetWindowSize(ImVec2(220, 300));
+        CelesteUI::ToggleButton(CelesteUI::whitelist("loeneditor.Tiles",std::vector<CelesteUI::togglebutton> {
+            {"All","loeneditor.all", true},
+            {"Foreground Tiles","loeneditor.ForegroundTiles", false},
+            {"Background Tiles","loeneditor.all", false},
+            {"Enitites","loeneditor.Enitites", false},
+            {"Triggers","loeneditor.Triggers", false},
+            {"Foreground Decals","loeneditor.ForegroundDecals", false},
+            {"Background Decals","loeneditor.BackgroundDecals", false}
+        }));
         ImGui::ShowDemoWindow();
 
         ImGui::End();
