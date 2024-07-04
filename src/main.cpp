@@ -28,7 +28,7 @@ $on_mod(Loaded) {
 
         ImGui::SetNextWindowPos(windowPos, ImGuiCond_Always);
         ImGui::Begin("My awesome window", nullptr, window_flags);
-        ImGui::SetWindowSize(ImVec2(220, 300));
+        ImGui::SetWindowSize(ImVec2(200, 200));
         CelesteUI::ToggleButton(CelesteUI::whitelist("loeneditor.Tiles",std::vector<CelesteUI::togglebutton> {
             {"All","loeneditor.all", true},
             {"Foreground Tiles","loeneditor.ForegroundTiles", false},
